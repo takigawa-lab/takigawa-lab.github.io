@@ -1,9 +1,199 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Takigawa Lab</title>
-  <body>
-    <h1>hello</h1>
-    <h2>about the lab</h2>
-    <p>we are a new lab starting at april 2025. more details comming soon (hopefully...)</p>
-  </body>
+  <!-- Google Fonts: モダンな印象のフォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ベーススタイル */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+      padding: 10px 0;
+    }
+    header img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+    }
+    /* 言語切替ボタン */
+    .language-toggle {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .language-toggle button {
+      padding: 6px 12px;
+      font-size: 1em;
+      margin-left: 5px;
+      cursor: pointer;
+      border: none;
+      background: #007BFF;
+      color: #fff;
+      border-radius: 4px;
+    }
+    .language-toggle button:hover {
+      background: #0056b3;
+    }
+    .content-section {
+      margin-bottom: 30px;
+    }
+    .content-section h2 {
+      font-size: 1.8em;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+    .topics ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+    /* 初期表示は日本語を表示 */
+    .en {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 言語切替 -->
+    <div class="language-toggle">
+      <button id="btn-ja">Ja</button>
+      <button id="btn-en">En</button>
+    </div>
+    <!-- タイトルと画像 -->
+    <header>
+      <h1>Takigawa Lab</h1>
+      <!-- ここに図（画像）を挿入します。画像のパスを適宜変更してください -->
+      <img src="combinatorial.png" alt="Lab Image">
+    </header>
+
+    <!-- 日本語コンテンツ -->
+    <section class="content-section ja">
+      <p>2025年4月からの新しい研究室です。暫定的な情報のみ載せています。詳細は更新をお待ちを！</p>
+      <h2>所属</h2>
+      <p>東京大学大学院新領域創成科学研究科 メディカル情報生命専攻<br >データ駆動知能分野 (瀧川研究室)</p>
+      <p>&#x27a1; <a href="https://drive.google.com/file/d/16Yd682QKEW6yWhVulq3xahy3PU2vBpFW/view?usp=drive_link">【生情】卒研のための研究室紹介 (2025)</a></p>
+
+      <div class="topics">
+        <h2>研究内容</h2>
+        <ul>
+          <li>組合せ構造・幾何構造・離散構造の統計的機械学習</li>
+          <li>機械発見のためのアルゴリズム</li>
+          <li>分子間相互作用とダイナクミクス</li>
+          <li>代謝、転写、触媒、顕微鏡、化学反応、量子化学、質量分析、立体構造</li>
+        </ul>
+      </div>
+      <div class="topics">
+        <h2>メンバー</h2>
+        <ul>
+          <li><a href="https://itakigawa.github.io/index_ja.html" target="_blank">瀧川 一学</a></li>
+        </ul>
+      </div>
+      <div class="topics">
+        <h2>随想</h2>
+        <ul>
+          <li>予感される組織に寄せて <a href="http://hdl.handle.net/2433/286198">&#x27a1;</a></li>
+          <li>なぜ経験則は説明の論理として受け入れがたいか <a href="http://hdl.handle.net/2433/286548">&#x27a1;</a></li>
+          <li>帰納と演繹の間を求めて <a href="https://youtu.be/T-grdDu3FIo">&#x27a1;</a></li>
+          <li>機械学習は真の理解や発見に寄与できるか <a href="https://youtu.be/T-grdDu3FIo">&#x27a1;</a></li>
+          <li>人工知能の基本問題 <a href="http://id.nii.ac.jp/1004/00010296/">&#x27a1;</a></li>
+          <li>小１にルービックキューブを教えてみた <a href="https://speakerdeck.com/itakigawa/xiao-1nirubitukukiyubuwojiao-etemita-qun-lun-supotunojiao-yu-topatanren-zhi">&#x27a1;</a></li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h2>アクセス</h2>
+        <p>〒277-8561 千葉県柏市柏の葉5-1-5 総合研究棟361室</p>
+        <!-- 地図の埋め込み -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.8095880770284!2d139.93450668885498!3d35.90267889999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189eaa88c1f275%3A0x54dcf52cbb1ec72d!2z44CSMjc3LTA4ODIg5Y2D6JGJ55yM5p-P5biC5p-P44Gu6JGJ77yV5LiB55uu77yRIOWuh-Wumee3mueglOeptuaJgA!5e0!3m2!1sja!2sjp!4v1743085221939!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="topics">
+        <h2>リンク</h2>
+        <ul>
+          <li><a href="https://www.cbms.k.u-tokyo.ac.jp/" target="_blank">専攻Webサイト</a></li>
+          <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">研究科Webサイト</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- English Content -->
+    <section class="content-section en">
+      <p>A new lab starting in April 2025. This is temporary information. More details coming soon!</p>
+      <h2>Affiliation</h2>
+      <p>Data-Driven Intelligence Lab (Takigawa Lab)<br >Department of Computational Biology and Medical Sciences<br>Graduate School of Frontier Sciences<br>The University of Tokyo</p>
+      <div class="topics">
+        <h2>Research Topics</h2>
+        <ul>
+          <li>Statistical machine learning for combinatorial/geometric/discrete structures</li>
+          <li>Algorithms for machine discovery</li>
+          <li>Intermolecular interactions and dynamics</li>
+          <li>Metabolism, transcription, catalysis, microscopy, chemical reactions, quantum chemistry, mass spectrometry, and molecular structures</li>
+        </ul>
+      </div>
+      <div class="topics">
+        <h2>Members</h2>
+        <ul>
+          <li><a href="https://itakigawa.github.io/" target="_blank">Ichigaku Takigawa</a></li>
+        </ul>
+      </div>
+       <div class="contact">
+        <h2>Location</h2>
+        <p>361 Kashiwa Research Complex, 5-1-5 Kashiwanoha, Kashiwa-shi, Chiba 277-8561, Japan.</p>
+        <!-- Embedded map -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.8095880770284!2d139.93450668885498!3d35.90267889999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189eaa88c1f275%3A0x54dcf52cbb1ec72d!2z44CSMjc3LTA4ODIg5Y2D6JGJ55yM5p-P5biC5p-P44Gu6JGJ77yV5LiB55uu77yRIOWuh-Wumee3mueglOeptuaJgA!5e0!3m2!1sja!2sjp!4v1743085221939!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="topics">
+        <h2>Random Thoughts</h2>
+        <ul>
+          <li>A Quick Peek at Vim <a href="https://youtu.be/XS73IJ37lgM">&#x27a1;</a></li>
+          <li>Coding Graph Neural Networks <a href="https://youtu.be/nez755i1oFE">&#x27a1;</a></li>
+          <li>Applied Machine Learning for Chemistry <a href="https://youtu.be/xPgDmYAteOk">&#x27a1;</a></li>
+          <li>A Modern Introduction to Decision Tree Ensembles <a href="https://youtu.be/pWr6Ji8uC_0">&#x27a1;</a></li>
+
+          <li>Exploring Practices in Machine Learning and Machine Discovery <a href="https://youtu.be/P4QogT8bdqY">&#x27a1;</a></li>
+        </ul>
+      </div>
+ <div class="topics">
+        <h2>Link</h2>
+        <ul>
+         <li><a href="https://www.cbms.k.u-tokyo.ac.jp/" target="_blank">Department Website</a></li>
+         <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">Graduate School Website</a></li>
+        </ul>
+      </div>
+   </section>
+  </div>
+
+  <script>
+    // 日本語・Englishの表示切替
+    document.getElementById("btn-ja").addEventListener("click", function() {
+      document.querySelector(".ja").style.display = "block";
+      document.querySelector(".en").style.display = "none";
+    });
+    document.getElementById("btn-en").addEventListener("click", function() {
+      document.querySelector(".ja").style.display = "none";
+      document.querySelector(".en").style.display = "block";
+    });
+  </script>
+</body>
 </html>
 
