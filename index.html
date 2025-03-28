@@ -184,16 +184,42 @@
   </div>
 
   <script>
-    // 日本語・Englishの表示切替
-    document.getElementById("btn-ja").addEventListener("click", function() {
-      document.querySelector(".ja").style.display = "block";
-      document.querySelector(".en").style.display = "none";
-    });
-    document.getElementById("btn-en").addEventListener("click", function() {
-      document.querySelector(".ja").style.display = "none";
-      document.querySelector(".en").style.display = "block";
-    });
-  </script>
+  function setLanguage(lang) {
+    const jaSection = document.querySelector(".ja");
+    const enSection = document.querySelector(".en");
+
+    if (lang === "en") {
+      jaSection.style.display = "none";
+      enSection.style.display = "block";
+      history.replaceState(null, "", "?lang=en");
+    } else {
+      jaSection.style.display = "block";
+      enSection.style.display = "none";
+      history.replaceState(null, "", "?lang=ja");
+    }
+  }
+
+  // URLのクエリパラメータから言語を取得
+  function getLangFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("lang") || "ja";
+  }
+
+  // ページ読み込み時に言語を設定
+  document.addEventListener("DOMContentLoaded", function () {
+    const lang = getLangFromUrl();
+    setLanguage(lang);
+  });
+
+  // ボタンクリックで切り替え
+  document.getElementById("btn-ja").addEventListener("click", function () {
+    setLanguage("ja");
+  });
+  document.getElementById("btn-en").addEventListener("click", function () {
+    setLanguage("en");
+  });
+</script>
+
 </body>
 </html>
 
