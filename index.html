@@ -9,6 +9,24 @@
    gtag('js', new Date());
    gtag('config', 'G-8Q924CC10P');
   </script>
+  <script>
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const ul = document.getElementById("random-list");
+      const items = Array.from(ul.children);
+      const shuffled = shuffle(items);
+
+      ul.innerHTML = "";
+      shuffled.forEach(item => ul.appendChild(item));
+    });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Takigawa Lab</title>
@@ -145,10 +163,10 @@
       </p>
       <div class="topics">
         <h2>メンバー</h2>
-        <ul>
-          <li><a href="https://itakigawa.github.io/index_ja.html" target="_blank">瀧川 一学</a></li>
-          <li>海野 智行</li>
-          <li>西岡 賢太郎</li>
+        <ul id="random-list">
+          <li><a href="https://itakigawa.github.io/index_ja.html" target="_blank">瀧川 一学</a> (グループ長)</li>
+          <li>海野 智行(学部生, 理・生情)</li>
+          <li>西岡 賢太郎 (学部, 理・生情)</li>
         </ul>
       </div>
       <div class="topics">
@@ -210,10 +228,10 @@
       </div>
       <div class="topics">
         <h2>People</h2>
-        <ul>
-          <li><a href="https://itakigawa.github.io/" target="_blank">Ichigaku Takigawa</a></li>
-          <li>Kentaro Nishioka</li>
-          <li>Tomoyuki Unno</li>
+        <ul id="random-list">
+          <li><a href="https://itakigawa.github.io/" target="_blank">Ichigaku Takigawa</a> (Group head)</li>
+          <li>Kentaro Nishioka (Undergrad, Bioinfo & SysBio, Faculty of Sci)</li>
+          <li>Tomoyuki Unno (Undergrad, Bioinfo & SysBio, Faculty of Sci)</li>
         </ul>
       </div>
       <div class="topics">
