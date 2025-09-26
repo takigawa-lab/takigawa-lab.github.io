@@ -1,47 +1,85 @@
 <i!DOCTYPE html>
-<html lang="ja">
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q924CC10P"></script>
-  <script>
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
-   gtag('config', 'G-8Q924CC10P');
-  </script>
-  <script>
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
+  <html lang="ja">
+    <head>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q924CC10P"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8Q924CC10P');
+      </script>
+      <script>
+        // Fisher–Yates シャッフル
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      const ul = document.getElementById("random-list");
-      const items = Array.from(ul.children);
-      const shuffled = shuffle(items);
+        // 指定セクション内の .random-list をシャッフル
+        function shuffleListIn(section) {
+          if (!section) return;
+          const ul = section.querySelector('.random-list');
+          if (!ul) return;
+          const items = Array.from(ul.children);
+          const shuffled = shuffle(items);
+          ul.innerHTML = '';
+          shuffled.forEach(li => ul.appendChild(li));
+        }
 
-      ul.innerHTML = "";
-      shuffled.forEach(item => ul.appendChild(item));
-    });
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Takigawa Lab</title>
-  <!-- Google Fonts: モダンな印象のフォント -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* ベーススタイル */
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      color: #333;
-      line-height: 1.6;
-    }
+        function setLanguage(lang) {
+          const jaSection = document.querySelector('.ja');
+          const enSection = document.querySelector('.en');
+
+          if (lang === 'en') {
+            if (jaSection) jaSection.style.display = 'none';
+            if (enSection) enSection.style.display = 'block';
+            history.replaceState(null, '', '?lang=en');
+            // 英語表示のたびにシャッフル
+            shuffleListIn(enSection);
+          } else {
+            if (jaSection) jaSection.style.display = 'block';
+            if (enSection) enSection.style.display = 'none';
+            history.replaceState(null, '', '?lang=ja');
+            // 日本語表示のたびにシャッフル
+            shuffleListIn(jaSection);
+          }
+        }
+
+        function getLangFromUrl() {
+          const params = new URLSearchParams(window.location.search);
+          return params.get('lang') || 'ja';
+        }
+
+        // DOM 構築後に初期化＆ボタンへイベント登録
+        document.addEventListener('DOMContentLoaded', () => {
+          const lang = getLangFromUrl();
+          setLanguage(lang);
+
+          const btnJa = document.getElementById('btn-ja');
+          const btnEn = document.getElementById('btn-en');
+          if (btnJa) btnJa.addEventListener('click', () => setLanguage('ja'));
+          if (btnEn) btnEn.addEventListener('click', () => setLanguage('en'));
+        });
+      </script>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Takigawa Lab</title>
+      <!-- Google Fonts: モダンな印象のフォント -->
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+      <style>
+/* ベーススタイル */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
     .container {
       max-width: 800px;
       margin: 30px auto;
@@ -104,211 +142,173 @@
     .en {
       display: none;
     }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <!-- 言語切替 -->
-    <div class="language-toggle">
-      <button id="btn-ja">Ja</button>
-      <button id="btn-en">En</button>
-    </div>
-    <!-- タイトルと画像 -->
-    <header>
-      <h1>Takigawa Lab</h1>
-      <!-- ここに図（画像）を挿入します。画像のパスを適宜変更してください -->
-      <img src="combinatorial.png" alt="Lab Image">
-    </header>
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <!-- 言語切替 -->
+        <div class="language-toggle">
+          <button id="btn-ja">Ja</button>
+          <button id="btn-en">En</button>
+        </div>
+        <!-- タイトルと画像 -->
+        <header>
+          <h1>Takigawa Lab</h1>
+          <!-- ここに図（画像）を挿入します。画像のパスを適宜変更してください -->
+          <img src="combinatorial.png" alt="Lab Image">
+        </header>
 
-    <!-- 日本語コンテンツ -->
-    <section class="content-section ja">
-      <p>2025年4月からの新しい研究室です。暫定的な情報のみ載せています。詳細は更新をお待ちを！</p>
-      <h2>所属</h2>
-      <p>東京大学<br >
-      新領域創成科学研究科 メディカル情報生命専攻<br >
-      理学部 生物情報科学科<br >
-      データ駆動知能分野 (瀧川研究室)</p>
-      <h2>研究室について</h2>
-      <p>
-      生物情報科学には「情報科学を使って生命科学を切り拓く」研究と「生命科学のための情報科学を切り拓く」研究の両輪が欠かせません。当研究室は後者の立場から「新しい情報科学(新しい科学の方法)」の創出を目指す100%ドライの研究室です。分子生物学が創出された時点から生命科学はある意味で「情報戦」になりました。無数にある個別の分子や生物をいくら調べても「生命」の仕組みや複雑さそのものに近づけないジレンマは、生命を成立させうる情報流の理解として「情報科学」の再定義によって超克されるべきだと考えています。
+        <!-- 日本語コンテンツ -->
+        <section class="content-section ja">
+          <p>2025年4月からの新しい研究室です。暫定的な情報のみ載せています。詳細は更新をお待ちを！</p>
+          <h2>所属</h2>
+          <p>東京大学<br >
+          新領域創成科学研究科 メディカル情報生命専攻<br >
+          理学部 生物情報科学科<br >
+          データ駆動知能分野 (瀧川研究室)</p>
+          <h2>研究室について</h2>
+          <p>
+          生物情報科学には「情報科学を使って生命科学を切り拓く」研究と「生命科学のための情報科学を切り拓く」研究の両輪が欠かせません。当研究室は後者の立場から「新しい情報科学(新しい科学の方法)」の創出を目指す100%ドライの研究室です。分子生物学が創出された時点から生命科学はある意味で「情報戦」になりました。無数にある個別の分子や生物をいくら調べても「生命」の仕組みや複雑さそのものに近づけないジレンマは、生命を成立させうる情報流の理解として「情報科学」の再定義によって超克されるべきだと考えています。
 
-      </p>
-      <p>
-      &#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/labs/takigawa/">CBMS専攻・研究室紹介</a><br >
-      &#x27a1; <a href="https://youtu.be/1bvXWxJk5qc">研究室紹介動画 (2025)</a><br >
-      </p>
-      <h3>研究内容</h3>
-      <ul>
-        <li>組合せ構造・幾何構造・離散構造の統計的機械学習</li>
-        <li>機械発見のためのアルゴリズム</li>
-        <li>分子間相互作用と非平衡ダイナクミクス</li>
-        <li>代謝、転写、触媒、顕微鏡、化学反応、量子化学、質量分析、立体構造</li>
-      </ul>
+          </p>
+          <p>
+          &#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/labs/takigawa/">CBMS専攻・研究室紹介</a><br >
+          &#x27a1; <a href="https://youtu.be/1bvXWxJk5qc">研究室紹介動画 (2025)</a><br >
+          </p>
+          <h3>研究内容</h3>
+          <ul>
+            <li>組合せ構造・幾何構造・離散構造の統計的機械学習</li>
+            <li>機械発見のためのアルゴリズム</li>
+            <li>分子間相互作用と非平衡ダイナクミクス</li>
+            <li>代謝、転写、触媒、顕微鏡、化学反応、量子化学、質量分析、立体構造</li>
+          </ul>
 
-      <h2>研究室への参加を希望する方へ</h2>
-      <p>当研究室では、研究が好きで、自分の関心分野において優れたスキルを持ち、取り組むことに深い情熱（あるいは偏愛）をもっている方を歓迎します。分野を超えた新しい挑戦に前向きな方をお待ちしています。</p>
-      <h3>学部生</h3>
-      <p>
-      理学部・生物情報科学科から卒業研究配属を受け入れています。教養学部の全科類から進学可能ですが、枠数および要求科目と要望科目の関係で、理科(一・二・三類)からの進学が中心です。<br />
-      </p>
-      <p>
-      &#x27a1; <a href="https://www.bs.s.u-tokyo.ac.jp/bioinfo/info/">進学案内</a>
-      </p>
-      <h3>大学院生</h3>
-      <p>
-      新領域創成科学研究科メディカル情報生命専攻に所属しています。修士・博士課程での参加を希望する方は公式な入試を通じて出願してください。出願を検討されている方は、自己紹介とこれまでの研究経験、メディカル情報生命専攻の志望動機、当研究室の研究との関連性についての簡単な記述(あれば成果物など)を添えて、<u>出願前に</u>瀧川までコンタクトしてください。
-      </p>
-      <p>
-      &#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/admission/">専攻入試案内</a>
-      </p>
-      <div class="topics">
-        <h2>メンバー</h2>
-        <ul id="random-list">
-          <li><a href="https://itakigawa.github.io/index_ja.html" target="_blank">瀧川 一学</a> (研究室長)</li>
-          <li>海野 智行 (学部生, 理・生情)</li>
-          <li>西岡 賢太郎 (学部生, 理・生情)</li>
-        </ul>
-        <h2>学外拠点</h2>
-        <ul>
-          <li>北海道大学 化学反応創成研究拠点(ICReDD) <a href="https://www.icredd.hokudai.ac.jp/takigawa-ichigaku">瀧川グループ</a></li>
-          <li>理化学研究所 革新知能統合研究センター(AIP) <a href="https://www.riken.jp/research/labs/aip/goalorient_tech/chem-react-inf/index.html">化学反応情報学チーム</a></li>
-        </ul>
+          <h2>研究室への参加を希望する方へ</h2>
+          <p>当研究室では、研究が好きで、自分の関心分野において優れたスキルを持ち、取り組むことに深い情熱（あるいは偏愛）をもっている方を歓迎します。分野を超えた新しい挑戦に前向きな方をお待ちしています。</p>
+          <h3>学部生</h3>
+          <p>
+          理学部・生物情報科学科から卒業研究配属を受け入れています。教養学部の全科類から進学可能ですが、枠数および要求科目と要望科目の関係で、理科(一・二・三類)からの進学が中心です。<br />
+          </p>
+          <p>
+          &#x27a1; <a href="https://www.bs.s.u-tokyo.ac.jp/bioinfo/info/">進学案内</a>
+          </p>
+          <h3>大学院生</h3>
+          <p>
+          新領域創成科学研究科メディカル情報生命専攻に所属しています。修士・博士課程での参加を希望する方は公式な入試を通じて出願してください。出願を検討されている方は、自己紹介とこれまでの研究経験、メディカル情報生命専攻の志望動機、当研究室の研究との関連性についての簡単な記述(あれば成果物など)を添えて、<u>出願前に</u>瀧川までコンタクトしてください。
+          </p>
+          <p>
+          &#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/admission/">専攻入試案内</a>
+          </p>
+          <div class="topics">
+            <h2>メンバー</h2>
+            <ul class="random-list">
+              <li><a href="https://itakigawa.github.io/index_ja.html" target="_blank">瀧川 一学</a> (研究室長)</li>
+              <li>海野 智行 (学部生, 理・生情)</li>
+              <li>西岡 賢太郎 (学部生, 理・生情)</li>
+            </ul>
+            <h2>学外チーム</h2>
+            <ul>
+              <li>北海道大学 化学反応創成研究拠点(ICReDD) <a href="https://www.icredd.hokudai.ac.jp/ja/takigawa-ichigaku">瀧川グループ</a></li>
+              <li>理化学研究所 革新知能統合研究センター(AIP) <a href="https://www.riken.jp/research/labs/aip/goalorient_tech/chem-react-inf/index.html">化学反応情報学チーム</a></li>
+            </ul>
+          </div>
+          <div class="topics">
+            <h2>随想</h2>
+            <ul>
+              <li>予感される組織に寄せて <a href="http://hdl.handle.net/2433/286198">&#x27a1;</a></li>
+              <li>なぜ経験則は説明の論理として受け入れがたいか <a href="http://hdl.handle.net/2433/286548">&#x27a1;</a></li>
+              <li>帰納と演繹の間を求めて <a href="https://youtu.be/T-grdDu3FIo">&#x27a1;</a></li>
+              <li>機械学習は真の理解や発見に寄与できるか <a href="http://hdl.handle.net/2433/285504">&#x27a1;</a></li>
+              <li>人工知能の基本問題 <a href="http://id.nii.ac.jp/1004/00010296/">&#x27a1;</a></li>
+              <li>小１にルービックキューブを教えてみた <a href="https://speakerdeck.com/itakigawa/xiao-1nirubitukukiyubuwojiao-etemita-qun-lun-supotunojiao-yu-topatanren-zhi">&#x27a1;</a></li>
+            </ul>
+          </div>
+          <div class="contact">
+            <h2>アクセス</h2>
+            <p>〒277-8561 千葉県柏市柏の葉5-1-5 総合研究棟361室</p>
+            <!-- 地図の埋め込み -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1615.9071869631907!2d139.9388217!3d35.9025617!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189eaa6294af61%3A0xccd46cb82f5e5734!2z44CSMjc3LTg1Njgg5Y2D6JGJ55yM5p-P5biC5p-P44Gu6JGJ77yV5LiB55uu77yR4oiS77yVIOe3j-WQiOeglOeptuajnw!5e0!3m2!1sja!2sjp!4v1743409958371!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="gmap_iframe"></iframe>
+          </div>
+          <div class="topics">
+            <h2>リンク</h2>
+            <ul>
+              <li><a href="https://www.cbms.k.u-tokyo.ac.jp/" target="_blank">専攻Webサイト</a> (メディカル情報生命専攻)</li>
+              <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">研究科Webサイト</a> (新領域創成科学研究科)</li>
+              <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">学科Webサイト</a> (理学部生物情報学科)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- English Content -->
+        <section class="content-section en">
+          <p>A new lab starting in April 2025. This is temporary information. More details coming soon!</p>
+          <h2>Affiliation</h2>
+          <p>Data-Driven Intelligence Lab (Takigawa Lab)<br >Department of Computational Biology and Medical Sciences<br>Graduate School of Frontier Sciences<br>The University of Tokyo</p>
+          <h2>About the Lab</h2>
+          <p>In the transdisciplinary domain where life science and information science intersect, two complementary approaches are essential: one that uses information science to advance life science, and another that advances information science for the sake of life science. Our laboratory is firmly rooted in the latter. We are a 100% dry lab dedicated to developing a new kind of information science—as a new way of doing science. Since the advent of molecular biology, life science has—in many ways—become a race to master information. No matter how extensively we study individual molecules or organisms, we face a dilemma: we cannot fully grasp the mechanisms or inherent complexity of life itself. We believe that this dilemma must be overcome by redefining information science as the science of understanding the flow of information that enables life to exist.
+          </p>
+          <p>&#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/en/labs/takigawa/">Lab Introduction at CBMS</a></p>
+          <h3>Research Topics</h3>
+          <ul>
+            <li>Statistical machine learning for combinatorial/geometric/discrete structures</li>
+            <li>Algorithms for machine discovery</li>
+            <li>Intermolecular interactions and non-equilibrium dynamics</li>
+            <li>Metabolism, transcription, catalysis, microscopy, chemical reactions, quantum chemistry, mass spectrometry, and molecular structures</li>
+          </ul>
+          <div class="topics">
+            <h2>Join Us</h2>
+            <p>Our lab is part of the Department of Computational Biology and Medical Sciences in the Graduate School of Frontier Sciences at the University of Tokyo. If you're interested in pursuing a Master’s or Ph.D., please apply through the official graduate admissions process.</p>
+            <p>
+            &#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/en/admission/">Department admissions information</a>
+            </p>
+            <p>Before applying, we encourage you to email the PI, Ichigaku Takigawa, with the following:</p>
+            <ol>
+              <li>A brief self-introduction and research background</li>
+              <li>Your CV/resume</li>
+              <li>A short statement describing your research interests and how they align with our lab's focus</li>
+            </ol>
+            <p>We welcome anyone who loves research, has strong skills in their area of interest, and is deeply passionate—perhaps even a little obsessed—about what they do. We're especially excited to work with those who are open to new challenges that cross disciplinary boundaries.</p>
+          </div>
+          <div class="topics">
+            <h2>People</h2>
+            <ul class="random-list">
+              <li><a href="https://itakigawa.github.io/" target="_blank">Ichigaku Takigawa</a> (Lab head)</li>
+              <li>Kentaro Nishioka (Undergrad, Bioinfo & SysBio, Faculty of Sci)</li>
+              <li>Tomoyuki Unno (Undergrad, Bioinfo & SysBio, Faculty of Sci)</li>
+            </ul>
+            <h2>Off-campus teams</h2>
+            <ul>
+              <li>Institute for Chemical Reaction Design and Discovery (ICReDD), Hokkaido University <a href="https://www.icredd.hokudai.ac.jp/takigawa-ichigaku">Takigawa Group</a></li>
+              <li>RIKEN Center for Advanced Intelligence Project (AIP) <a href="https://www.riken.jp/en/research/labs/aip/goalorient_tech/chem-react-inf/index.html">Chemical Reaction Informatics Team</a></li>
+            </ul>
+          </div>
+          <div class="topics">
+            <h2>Random Thoughts</h2>
+            <ul>
+              <li>A Quick Peek at Vim <a href="https://youtu.be/XS73IJ37lgM">&#x27a1;</a></li>
+              <li>Coding Graph Neural Networks <a href="https://youtu.be/nez755i1oFE">&#x27a1;</a></li>
+              <li>Applied Machine Learning for Chemistry <a href="https://youtu.be/xPgDmYAteOk">&#x27a1;</a></li>
+              <li>A Modern Introduction to Decision Tree Ensembles <a href="https://youtu.be/pWr6Ji8uC_0">&#x27a1;</a></li>
+
+              <li>Exploring Practices in Machine Learning and Machine Discovery <a href="https://youtu.be/P4QogT8bdqY">&#x27a1;</a></li>
+            </ul>
+          </div>
+          <div class="contact">
+            <h2>Location</h2>
+            <p>361 Kashiwa Research Complex, 5-1-5 Kashiwanoha, Kashiwa-shi, Chiba 277-8561, Japan.</p>
+            <!-- Embedded map -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1019.605494691153!2d139.938821661536!3d35.902561650977184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189eaa6294af61%3A0xccd46cb82f5e5734!2sKashiwa%20Research%20Complex%2C%205-ch%C5%8Dme-1-5%20Kashiwanoha%2C%20Kashiwa%2C%20Chiba%20277-8568!5e0!3m2!1sen!2sjp!4v1743409764960!5m2!1sen!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="gmap_iframe"></iframe>
+          </div>
+          <div class="topics">
+            <h2>Link</h2>
+            <ul>
+              <li><a href="https://www.cbms.k.u-tokyo.ac.jp/" target="_blank">Website</a> (Department of Computational Biology and Medical Sciences)</li>
+              <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">Website</a> (Graduate School of Frontier Sciences)</li>
+              <li><a href="https://www.bs.s.u-tokyo.ac.jp/bioinfo/" target="_blank">Website</a> (Department of bioinformatics and Systems Biology)</li>
+            </ul>
+          </div>
+        </section>
       </div>
-      <div class="topics">
-        <h2>随想</h2>
-        <ul>
-          <li>予感される組織に寄せて <a href="http://hdl.handle.net/2433/286198">&#x27a1;</a></li>
-          <li>なぜ経験則は説明の論理として受け入れがたいか <a href="http://hdl.handle.net/2433/286548">&#x27a1;</a></li>
-          <li>帰納と演繹の間を求めて <a href="https://youtu.be/T-grdDu3FIo">&#x27a1;</a></li>
-          <li>機械学習は真の理解や発見に寄与できるか <a href="http://hdl.handle.net/2433/285504">&#x27a1;</a></li>
-          <li>人工知能の基本問題 <a href="http://id.nii.ac.jp/1004/00010296/">&#x27a1;</a></li>
-          <li>小１にルービックキューブを教えてみた <a href="https://speakerdeck.com/itakigawa/xiao-1nirubitukukiyubuwojiao-etemita-qun-lun-supotunojiao-yu-topatanren-zhi">&#x27a1;</a></li>
-        </ul>
-      </div>
-      <div class="contact">
-        <h2>アクセス</h2>
-        <p>〒277-8561 千葉県柏市柏の葉5-1-5 総合研究棟361室</p>
-        <!-- 地図の埋め込み -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1615.9071869631907!2d139.9388217!3d35.9025617!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189eaa6294af61%3A0xccd46cb82f5e5734!2z44CSMjc3LTg1Njgg5Y2D6JGJ55yM5p-P5biC5p-P44Gu6JGJ77yV5LiB55uu77yR4oiS77yVIOe3j-WQiOeglOeptuajnw!5e0!3m2!1sja!2sjp!4v1743409958371!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="gmap_iframe"></iframe>
-      </div>
-      <div class="topics">
-        <h2>リンク</h2>
-        <ul>
-          <li><a href="https://www.cbms.k.u-tokyo.ac.jp/" target="_blank">専攻Webサイト</a> (メディカル情報生命専攻)</li>
-          <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">研究科Webサイト</a> (新領域創成科学研究科)</li>
-          <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">学科Webサイト</a> (理学部生物情報学科)</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- English Content -->
-    <section class="content-section en">
-      <p>A new lab starting in April 2025. This is temporary information. More details coming soon!</p>
-      <h2>Affiliation</h2>
-      <p>Data-Driven Intelligence Lab (Takigawa Lab)<br >Department of Computational Biology and Medical Sciences<br>Graduate School of Frontier Sciences<br>The University of Tokyo</p>
-      <h2>About the Lab</h2>
-      <p>In the transdisciplinary domain where life science and information science intersect, two complementary approaches are essential: one that uses information science to advance life science, and another that advances information science for the sake of life science. Our laboratory is firmly rooted in the latter. We are a 100% dry lab dedicated to developing a new kind of information science—as a new way of doing science. Since the advent of molecular biology, life science has—in many ways—become a race to master information. No matter how extensively we study individual molecules or organisms, we face a dilemma: we cannot fully grasp the mechanisms or inherent complexity of life itself. We believe that this dilemma must be overcome by redefining information science as the science of understanding the flow of information that enables life to exist.
-</p>
-      <p>&#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/en/labs/takigawa/">Lab Introduction at CBMS</a></p>
-        <h3>Research Topics</h3>
-        <ul>
-          <li>Statistical machine learning for combinatorial/geometric/discrete structures</li>
-          <li>Algorithms for machine discovery</li>
-          <li>Intermolecular interactions and non-equilibrium dynamics</li>
-          <li>Metabolism, transcription, catalysis, microscopy, chemical reactions, quantum chemistry, mass spectrometry, and molecular structures</li>
-        </ul>
-      <div class="topics">
-        <h2>Join Us</h2>
-        <p>Our lab is part of the Department of Computational Biology and Medical Sciences in the Graduate School of Frontier Sciences at the University of Tokyo. If you're interested in pursuing a Master’s or Ph.D., please apply through the official graduate admissions process.</p>
-      <p>
-      &#x27a1; <a href="https://www.cbms.k.u-tokyo.ac.jp/en/admission/">Department admissions information</a>
-      </p>
-        <p>Before applying, we encourage you to email the PI, Ichigaku Takigawa, with the following:</p>
-        <ol>
-          <li>A brief self-introduction and research background</li>
-          <li>Your CV/resume</li>
-          <li>A short statement describing your research interests and how they align with our lab's focus</li>
-        </ol>
-        <p>We welcome anyone who loves research, has strong skills in their area of interest, and is deeply passionate—perhaps even a little obsessed—about what they do. We're especially excited to work with those who are open to new challenges that cross disciplinary boundaries.</p>
-      </div>
-      <div class="topics">
-        <h2>People</h2>
-        <ul id="random-list">
-          <li><a href="https://itakigawa.github.io/" target="_blank">Ichigaku Takigawa</a> (Lab head)</li>
-          <li>Kentaro Nishioka (Undergrad, Bioinfo & SysBio, Faculty of Sci)</li>
-          <li>Tomoyuki Unno (Undergrad, Bioinfo & SysBio, Faculty of Sci)</li>
-        </ul>
-        <h2>Off-campus location</h2>
-        <ul>
-          <li>Institute for Chemical Reaction Design and Discovery (ICReDD), Hokkaido University <a href="https://www.icredd.hokudai.ac.jp/takigawa-ichigaku">Takigawa Group</a></li>
-          <li>RIKEN Center for Advanced Intelligence Project (AIP) <a href="https://www.riken.jp/en/research/labs/aip/goalorient_tech/chem-react-inf/index.html">Chemical Reaction Informatics Team</a></li>
-        </ul>
-      </div>
-      <div class="topics">
-        <h2>Random Thoughts</h2>
-        <ul>
-          <li>A Quick Peek at Vim <a href="https://youtu.be/XS73IJ37lgM">&#x27a1;</a></li>
-          <li>Coding Graph Neural Networks <a href="https://youtu.be/nez755i1oFE">&#x27a1;</a></li>
-          <li>Applied Machine Learning for Chemistry <a href="https://youtu.be/xPgDmYAteOk">&#x27a1;</a></li>
-          <li>A Modern Introduction to Decision Tree Ensembles <a href="https://youtu.be/pWr6Ji8uC_0">&#x27a1;</a></li>
-
-          <li>Exploring Practices in Machine Learning and Machine Discovery <a href="https://youtu.be/P4QogT8bdqY">&#x27a1;</a></li>
-        </ul>
-      </div>
-      <div class="contact">
-        <h2>Location</h2>
-        <p>361 Kashiwa Research Complex, 5-1-5 Kashiwanoha, Kashiwa-shi, Chiba 277-8561, Japan.</p>
-        <!-- Embedded map -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1019.605494691153!2d139.938821661536!3d35.902561650977184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189eaa6294af61%3A0xccd46cb82f5e5734!2sKashiwa%20Research%20Complex%2C%205-ch%C5%8Dme-1-5%20Kashiwanoha%2C%20Kashiwa%2C%20Chiba%20277-8568!5e0!3m2!1sen!2sjp!4v1743409764960!5m2!1sen!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="gmap_iframe"></iframe>
-      </div>
-  <div class="topics">
-        <h2>Link</h2>
-        <ul>
-         <li><a href="https://www.cbms.k.u-tokyo.ac.jp/" target="_blank">Website</a> (Department of Computational Biology and Medical Sciences)</li>
-         <li><a href="https://www.k.u-tokyo.ac.jp/" target="_blank">Website</a> (Graduate School of Frontier Sciences)</li>
-         <li><a href="https://www.bs.s.u-tokyo.ac.jp/bioinfo/" target="_blank">Website</a> (Department of bioinformatics and Systems Biology)</li>
-        </ul>
-      </div>
-   </section>
-  </div>
-
-  <script>
-  function setLanguage(lang) {
-    const jaSection = document.querySelector(".ja");
-    const enSection = document.querySelector(".en");
-
-    if (lang === "en") {
-      jaSection.style.display = "none";
-      enSection.style.display = "block";
-      history.replaceState(null, "", "?lang=en");
-    } else {
-      jaSection.style.display = "block";
-      enSection.style.display = "none";
-      history.replaceState(null, "", "?lang=ja");
-    }
-  }
-
-  // URLのクエリパラメータから言語を取得
-  function getLangFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("lang") || "ja";
-  }
-
-  // ページ読み込み時に言語を設定
-  document.addEventListener("DOMContentLoaded", function () {
-    const lang = getLangFromUrl();
-    setLanguage(lang);
-  });
-
-  // ボタンクリックで切り替え
-  document.getElementById("btn-ja").addEventListener("click", function () {
-    setLanguage("ja");
-  });
-  document.getElementById("btn-en").addEventListener("click", function () {
-    setLanguage("en");
-  });
-</script>
-
-</body>
-</html>
+    </body>
+  </html>
 
