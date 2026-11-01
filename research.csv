@@ -27,3 +27,12 @@ talk,学会発表,2026,2026-10-27,訓練誤差ゼロの分類・回帰モデル�
 talk,学会発表,2026,2026-10-28,Direct Recourse Learning: Algorithmic Recourse without a Decision Model.,"Jiali Ma, Ichigaku Takigawa, Akihiro Yamamoto",第29回情報論的学習理論ワークショップ (IBIS2026),"2026年10月28日, ソニックシティ（埼玉県さいたま市）, ポスター発表 [2-161]",https://ibisml.org/ibis2026/posters/
 talk,学会発表,2026,2026-10-28,Evidence-State Transition Pretraining for Molecular Representation Learning,"Xuan Liu, Ichigaku Takigawa",第29回情報論的学習理論ワークショップ (IBIS2026),"2026年10月28日, ソニックシティ（埼玉県さいたま市）, ポスター発表 [2-195]",https://ibisml.org/ibis2026/posters/
 talk,学会発表,2026,2026-09-17,私的情報を開示しないアルゴリズム的償還のパーソナライズ化,馬嘉利・瀧川一学・山本章博,第137回 人工知能学会人工知能基本問題研究会 (SIG-FPAI),"2026年9月17日-9月18日, 高山市民文化会館（岐阜県高山市）, pp. 44-49",https://www.jstage.jst.go.jp/article/jsaifpai/137/0/137_44/_article/-char/ja
+lecture,講演,2026,2026-08-09,Machine Learning and Machine Discovery for Chemistry: Practice and Challenges,瀧川一学,第5回 北海道大学医療AIシンポジウム,"2026年8月9日, 北海道大学医学部学友会館「フラテ」フラテホールおよびオンライン",https://ai.med.hokudai.ac.jp/news/2026/07/01/3553/
+lecture,講演,2025,2025-12-16,From machine learning to machine discovery: practical applications in chemistry,瀧川一学,Pacifichem 2025 symposium: Computational Modeling and Design of Functional Materials in the AI Era,"December 16, 2025, Honolulu, USA",https://itakigawa.github.io/news.html
+lecture,講演,2025,2025-10-20,パネルディスカッション：データベースなしじゃ語れない！～マルチモーダル×AIは科学にどんな変革をもたらすの？～,瀧川一学,トーゴーの日シンポジウム2025,"2025年10月20日, 品川ザ・グランドホール",https://biosciencedbc.jp/event/symposium/togo2025/
+lecture,講演,2025,2025-06-13,生命科学のためのAI for Scienceと課題,瀧川一学,第4回 大学院医学セミナー,"2025年6月13日, 横浜市立大学",https://itakigawa.github.io/news.html
+lecture,講演,2025,2025-05-29,AI for Science:新しい科学の方法の科学,瀧川一学,黒田研究室セミナー（東京大学 大学院理学系研究科 生物科学専攻）,"2025年5月29日, 理学部3号館412号室およびオンライン",https://itakigawa.github.io/news.html
+lecture,講演,2025,2025-05-26,機械学習から見るAI for Scienceの課題と展望,瀧川一学,Oak Leafセミナー（柏キャンパス合同セミナー）,"2025年5月26日, 東京大学柏キャンパス（オンライン）",https://itakigawa.github.io/news.html
+lecture,講演,2025,2025-05-25,AI for Science: 新しいデータ駆動科学の夜明けと憂鬱,瀧川一学,日本地球惑星科学連合2025年大会 (JpGU)：結晶成長、溶解における界面・ナノ現象 (M-IS13),"2025年5月25日, 幕張メッセ（千葉市）",https://itakigawa.github.io/news.html
+lecture,講演,2026,2026-10-26,AI for Scienceにおける機械学習の実践：Small Data、OOD、不確実性、実験計画,瀧川一学,第29回情報論的学習理論ワークショップ (IBIS2026) チュートリアル,"2026年10月26日, ソニックシティ（埼玉）",https://ibisml.org/ibis2026/tutorial/
+lecture,講演,2026,2026-10-21,見えるものを見るAI、見たいものを見る人間,瀧川一学,2026年度第5回学融合セミナー,"2026年10月21日, 東京大学大学院新領域創成科学研究科",https://www.k.u-tokyo.ac.jp/education/seminar/contents/202605.html

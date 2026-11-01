@@ -17,6 +17,7 @@ SECTION_ORDER = [
     ("talk", "学会発表"),
     ("journal", "査読付き論文"),
     ("conference", "国際会議論文"),
+    ("lecture", "講演"),
 ]
 
 
